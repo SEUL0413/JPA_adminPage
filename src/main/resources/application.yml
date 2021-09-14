@@ -1,0 +1,17 @@
+
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update # 새로 추가한 옵션 Entity Class 기반으로 Table 생성
+  datasource:
+    url: jdbc:mysql://localhost:3306/study?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    root: info
+    com.zaxxer.hikari.HikariConfig: debug
+    org.hibernate.SQL: debug
+    hibernate.type.descriptor.sql.BasicBinder: trace

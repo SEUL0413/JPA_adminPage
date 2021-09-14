@@ -1,6 +1,8 @@
 package com.example.study.repository;
 
 import com.example.study.StudyApplication;
+import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -16,10 +18,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)    // 실제 db 사용
-@DisplayName("ItemRepositoryTest 테스트")
-public class UserRepositoryTest {
+
+public class UserRepositoryTest extends StudyApplicationTests {
 
     // Dependency Injection (DI)
     @Autowired
@@ -28,23 +28,26 @@ public class UserRepositoryTest {
     @Test
     public void create(){
         User user = new User();
-        user.setAccount("TestUser02");
-        user.setEmail("TestUser02@gmail.com");
+        user.setAccount("TestUser01");
+        user.setEmail("TestUser01@gmail.com");
         user.setPhoneNumber("010-1111-1111");
         user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("admin2");
+        user.setCreatedBy("admin");
 
         User newUser = userRepository.save(user);
         System.out.println(newUser);
     }
 
     @Test
+    @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(2L);
+        Optional<User> user = userRepository.findById(1L);
 
         user.ifPresent(selectUser ->{
-            System.out.println("user : " + user);
-            System.out.println("email : " + selectUser.getEmail());
+           selectUser.getOrderDetailList().stream().forEach(detail ->{
+               Item item = detail.getItem();
+               System.out.println(item);
+           });
         });
     }
 
