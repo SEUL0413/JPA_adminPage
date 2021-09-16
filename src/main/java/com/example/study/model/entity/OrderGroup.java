@@ -3,30 +3,33 @@ package com.example.study.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.apache.tomcat.jni.Local;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDetail {
+@Entity
+public class OrderGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String status;
-    private LocalDateTime arrivalDate;
-    private Integer quantity;
+    private String orderType;
+    private String revAddress;
+    private String revName;
+    private String paymentType;
     private BigDecimal totalPrice;
+    private Integer totalQuantity;
+    private LocalDateTime orderAt;
+    private LocalDateTime arrivalDate;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
-
-
-
 }
